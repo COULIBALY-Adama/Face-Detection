@@ -1,0 +1,11 @@
+all: detection_visages
+
+detection_visages: detection_visages.o
+	g++ detection_visages.o -o detection_visages `pkg-config --libs opencv` 
+
+detection_peau.o: detection_visages.cpp
+	g++ -c detection_visages.cpp `pkg-config --cflags opencv` 
+	@echo 'Finished building target: $@'
+
+clean:
+	rm -rf *o detection_visages
